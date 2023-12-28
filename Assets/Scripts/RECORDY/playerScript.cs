@@ -13,3 +13,4 @@ public class playerScript : MonoBehaviour
     public static float charmRangeStone;
     public static float summonBonusHPStone;
 }
+
