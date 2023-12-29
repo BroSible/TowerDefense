@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CanvasUpgradeMenuCheck : MonoBehaviour
 {
     [Header("UpgradeCanvas")]
-    [SerializeField] static private Canvas _UpgradeMenuCanvas;
+    [SerializeField] private Canvas _UpgradeMenuCanvas;
 
     public void DecreaseCharmCooldown()
     {
@@ -29,7 +29,7 @@ public class CanvasUpgradeMenuCheck : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public static void ChooseUpgrade()
+    public void ChooseUpgrade()
     {
        _UpgradeMenuCanvas.gameObject.SetActive(true); 
        Time.timeScale = 0;
