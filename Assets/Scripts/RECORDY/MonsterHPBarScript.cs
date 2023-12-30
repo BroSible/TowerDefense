@@ -40,7 +40,7 @@ public class MonsterHPBarScript : MonoBehaviour
     {
         if(square!=null)
         {
-            //_maxWidth=EnemyCurrentHP/EnemyMaxHP; //поменяешь когда вставишь свое MaxHP и CurrentHP для моба
+            //_maxWidth=(EnemyMaxHP*10)-((EnemyMaxHP-EnemyCurrentHP)*10); //поменяешь когда вставишь свое EnemyMaxHP и EnemyCurrentHP для моба
             square.transform.localScale = new Vector2(_maxWidth, sizeHpBarY);
             square.transform.position= new Vector2(_target.transform.position.x,_target.transform.position.y+YHpBarTransformDelay);
 
