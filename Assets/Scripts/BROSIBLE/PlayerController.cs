@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     public bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
-    private bool m_HasJumped; // Добавляем новую переменную для отслеживания прыжка
+    public bool m_HasJumped; 
+    public AudioSource landingSound;
+    public AudioSource jumpSound;
 
     public UnityEvent OnLandEvent;
 
@@ -32,8 +34,9 @@ public class PlayerController : MonoBehaviour
         {
             if (m_HasJumped)
             {
+                landingSound.Play();
                 OnLandEvent.Invoke();
-                m_HasJumped = false; // Сбрасываем флаг прыжка при касании земли
+                m_HasJumped = false; 
             }
         }
     }
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
             if (!m_HasJumped && jump)
             {
                 m_HasJumped = true;
+                jumpSound.Play();
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }

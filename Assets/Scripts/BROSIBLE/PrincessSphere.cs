@@ -8,6 +8,7 @@ public class PrincessSphere : MonoBehaviour
     private Rigidbody2D rb2d;
     public static float timeToDeleteBullet = 1f;
     public float timeToDelete = 0f;
+    
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class PrincessSphere : MonoBehaviour
     private void Update()
     {
         timeToDelete += Time.deltaTime;
+
         if(timeToDelete >= timeToDeleteBullet)
         {
             DestroySelf();

@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public bool jump = false;
     public bool run = false;
     public Animator animator;
+
+    
     
     
     void Start()

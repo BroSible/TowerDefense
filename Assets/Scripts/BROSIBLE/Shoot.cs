@@ -1,34 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
     public Transform shootingPoint;
-    GameObject bulletRef;
     public GameObject bullet;
-    public static float timeBetweenShots = 1.5f; 
-    public float timeSinceLastShot = 0f; 
-    Animator animator;
-    public static bool isShooting = false;
+    public float timeBetweenShots = 1.5f;
+    private float timeRemaining = 0f;
+    private bool canShoot = true;
+    public Text textReload;
+    public Animator blackOut;
+    public AudioSource attack;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        bulletRef = Resources.Load<GameObject>("Princess sphere");
+        textReload.text = "";
     }
 
- 
-    void FixedUpdate()
+    void Update()
     {
-        timeSinceLastShot += Time.deltaTime;
-            if(Input.GetButton("Fire1"))
+        if (canShoot)
+        {
+            blackOut.Play("Lightening");
+            if (Input.GetButton("Fire1"))
             {
-                if(timeSinceLastShot >= timeBetweenShots)
-                {
-                    Instantiate(bullet,shootingPoint.position,transform.rotation);
-                    timeSinceLastShot = 0;
-                }
+                ShootBullet();
             }
+
+            else
+            {
+                textReload.text = ""; 
+            }
+        }
+        else
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                blackOut.Play("Blackout");
+                if (timeRemaining < 0) 
+                {
+                    timeRemaining = 0;
+                }
+
+            }
+            else
+            {
+                canShoot = true;
+            }
+        }
+
+        if (!canShoot)
+        {
+            textReload.text = timeRemaining.ToString("F1");
+        }
+    }
+
+    void ShootBullet()
+    {
+        Instantiate(bullet, shootingPoint.position, transform.rotation);
+        attack.Play();
+        canShoot = false; 
+        timeRemaining = timeBetweenShots; 
     }
 }
